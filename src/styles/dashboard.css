@@ -1,0 +1,238 @@
+/* General body styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #e0e0e0; /* Light grey background */
+  color: #333; /* Default text color */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: #1c1c1c;
+  color: #f5f5f5;
+}
+
+/* Fixed header container */
+.header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ccc;
+  z-index: 1000; /* Ensure header is always on top */
+  display: flex;
+  justify-content: space-between; /* Use space-between to align items */
+  align-items: center;
+  padding: 20px 30px;
+  height: 80px; /* Explicit height for larger header */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .header-container {
+  background-color: #2b2b2b;
+  border-bottom-color: #444;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* App name centered in the header */
+.header-container .app-name {
+  font-size: 2em; /* Larger font size */
+  font-weight: bold;
+  color: #e60023; /* Pinterest red */
+  flex: 1; /* Push app name to the left */
+  text-align: left; /* Align app name to the left */
+}
+
+/* Dark mode toggle switch */
+.header-container .dark-mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Toggle switch styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+/* Dashboard container */
+.dashboard-container {
+  padding: 100px 20px 20px; /* Top padding to avoid overlap with header */
+  max-width: 1200px;
+  margin: auto;
+  background-color: inherit; /* Match body background */
+}
+
+/* Timeline title */
+.timeline-title {
+  text-align: center;
+  font-size: 2em;
+  margin: 20px 0;
+  color: #333;
+}
+
+body.dark-mode .timeline-title {
+  color: #f5f5f5;
+}
+
+/* Loading screen styles */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height of the viewport */
+  font-family: Arial, sans-serif;
+  color: inherit; /* Match the text color to the main body */
+  background-color: inherit; /* Match the background color to the main body */
+}
+
+.loading-screen p {
+  margin-top: 20px;
+  font-size: 18px;
+  color: inherit; /* Match the text color */
+}
+
+/* Spinner animation */
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #e60023;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Screenshot button styling for light mode */
+/* Screenshot button styling for light mode */
+.screenshot-button.light-mode {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #00796b; /* Teal color for light mode */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.screenshot-button.light-mode:hover {
+  background-color: #004d40; /* Darker teal on hover for light mode */
+}
+
+/* Screenshot button styling for dark mode */
+.screenshot-button.dark-mode {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #2196f3; /* Blue color for dark mode */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.screenshot-button.dark-mode:hover {
+  background-color: #1976d2; /* Darker blue on hover for dark mode */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    padding: 15px; /* Reduce padding */
+    height: auto; /* Allow height to adjust based on content */
+  }
+
+  .header-container .app-name {
+    font-size: 1.5em; /* Reduce font size */
+    text-align: left; /* Align text to the left */
+    margin-bottom: 10px; /* Add margin for spacing */
+  }
+
+  .header-container .dark-mode-switch {
+    justify-content: flex-start; /* Align to the left */
+  }
+
+  .dashboard-container {
+    padding: 80px 10px 10px; /* Adjust padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centers content horizontally */
+    justify-content: center;  
+  }
+
+  .timeline-title {
+    font-size: 1.8em;
+  }
+
+  .screenshot-button {
+    bottom: 10px;
+    right: 10px;
+    font-size: 14px; /* Smaller font size */
+    padding: 8px 16px; /* Adjust padding */
+  }
+}
+
+
+
