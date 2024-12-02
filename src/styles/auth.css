@@ -1,92 +1,160 @@
-/* Container for both Login and Register pages */
-.auth-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f4f7fa;
+/* General body styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #e0e0e0; /* Light grey background */
+  color: #333; /* Default text color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensures the page stretches to fill the screen */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  flex-direction: column;
+}
+
+/* Dark mode styling */
+body.dark-mode {
+  background-color: #1c1c1c; /* Dark background */
+  color: #f5f5f5; /* Light text color */
+}
+
+/* Login container styles */
+.login-container {
+  text-align: center;
+  background: #ffffff; /* Light mode box background */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Adds depth to the box */
+  width: 100%;
+  max-width: 400px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode .login-container {
+  background: #333333; /* Dark mode box background */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Slightly darker shadow in dark mode */
+}
+
+/* Header inside the container */
+.app-header h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #e60023; /* Pinterest red */
+  margin-bottom: 20px;
+}
+
+/* Login button styling */
+button {
+  background-color: #e60023; /* Pinterest red */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: auto;
+}
+
+button:hover {
+  background-color: #c4001e;
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: #a2001b;
+}
+
+/* Dark mode toggle switch outside the container */
+.dark-mode-switch {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: inherit; /* Adapts to light or dark mode */
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+  margin-left: 8px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+/* Footer outside the container */
+.app-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #888888;
+}
+
+body.dark-mode .app-footer {
+  color: #bbbbbb;
+}
+
+.app-footer a {
+  color: #e60023; /* Pinterest red */
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 480px) {
+  .login-container {
     padding: 20px;
+    width: 90%; /* Reduce width for smaller screens */
   }
-  
-  /* Heading for both pages */
-  .auth-container h2 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
+
+  .app-header h1 {
+    font-size: 28px; /* Slightly smaller app name */
   }
-  
-  /* Form styling */
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+
+  .app-footer {
+    font-size: 12px;
   }
-  
-  /* Input field styling */
-  input {
-    margin: 10px 0;
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    outline: none;
-    transition: all 0.3s ease;
-  }
-  
-  input:focus {
-    border-color: #4f8a8b;
-  }
-  
-  /* Submit button styling */
-  button {
-    padding: 12px;
-    font-size: 1.2rem;
-    background-color: #4f8a8b;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #3c7171;
-  }
-  
-  /* Checkmark and consent section for Register page */
-  .consent {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .consent input {
-    margin-right: 10px;
-  }
-  
-  .consent label {
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
-  /* Mobile responsiveness */
-  @media screen and (max-width: 768px) {
-    .auth-container {
-      padding: 10px;
-    }
-  
-    form {
-      padding: 15px;
-    }
-  
-    input, button {
-      font-size: 1rem;
-    }
-  }
-  
+}

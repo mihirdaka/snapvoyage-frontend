@@ -1,110 +1,154 @@
-/* Reset some default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Body styling */
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7fc;
-    color: #333;
-  }
-  
-  /* Timeline container */
-  .timeline-container {
-    width: 80%;
-    margin: 50px auto;
-    position: relative;
-    padding: 0 20px;
-  }
-  
-  /* The vertical line of the timeline */
+/* Base styles for timeline container */
+.timeline-container {
+  position: relative;
+  padding: 50px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Vertical line that represents the timeline */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  background-color: #ccc; /* Light color for default (light mode) */
+  transform: translateX(-50%);
+}
+
+/* Timeline event styling */
+.timeline-event {
+  position: relative;
+  width: 45%; /* Reduced width to make space for better layout */
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  color: #333; /* Default text color */
+  transition: all 0.3s ease;
+  border: 2px solid #ddd; /* Add subtle border */
+}
+
+/* Left side events */
+.timeline-event.left {
+  left: 0;
+  text-align: left;
+  background-color: #e7f3fe; /* Light blue background for left-side cards */
+  transform: translateX(-30px); /* Add a slight offset */
+  border-left: 5px solid #007bff; /* Blue left border */
+}
+
+/* Right side events */
+.timeline-event.right {
+  left: 55%;
+  text-align: left;
+  background-color: #e8f4f4; /* Light greenish background for right-side cards */
+  transform: translateX(30px); /* Add a slight offset */
+  border-right: 5px solid #28a745; /* Green right border */
+}
+
+/* Hover effect to lift the card */
+.timeline-event:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: #007bff; /* Blue border color on hover */
+}
+
+/* Golden yellow border for even timeline events */
+.timeline-event.left:nth-child(even) {
+  border-left: 5px solid #f1c40f; /* Golden yellow left border */
+}
+
+.timeline-event.right:nth-child(even) {
+  border-right: 5px solid #f1c40f; /* Golden yellow right border */
+}
+
+/* Styling for event content */
+.event-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Title style */
+.event-content h3 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Date style */
+.event-content p {
+  font-size: 1.1em;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Collage container for images */
+.collage-container {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+/* Styling for collage images */
+.collage-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
   .timeline-line {
-    width: 2px;
-    background-color: #007bff;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    background-color: #00bcd4; /* Bright cyan for dark mode */
   }
-  
-  /* Individual timeline events */
+
+  /* Timeline card styles */
   .timeline-event {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    margin-bottom: 30px;
+    background-color: #2e3a59; /* Dark background for dark mode */
+    color: #f1f1f1; /* Light text color for readability */
+    border: 2px solid #444; /* Darker border for dark mode */
   }
-  
-  .timeline-event-left {
-    flex: 1;
-    text-align: right;
-    padding-right: 30px;
+
+  .timeline-event.left {
+    background-color: #2e3a59; /* Consistent dark background for left-side cards */
+    border-left: 5px solid #1a73e8; /* Bright cyan left border */
   }
-  
-  .timeline-event-right {
-    flex: 1;
-    text-align: left;
-    padding-left: 30px;
+
+  .timeline-event.right {
+    background-color: #3c4a66; /* Slightly lighter dark background for right-side cards */
+    border-right: 5px solid #34d399; /* Green right border */
   }
-  
-  .timeline-event .event-dot {
-    width: 20px;
-    height: 20px;
-    background-color: #007bff;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+
+  /* Event content styling for dark mode */
+  .event-content {
+    background: #333; /* Darker background for event content */
+    color: #f1f1f1; /* Light text for better contrast */
+    border: 1px solid #555; /* Dark border */
+    padding: 20px;
   }
-  
-  .timeline-event .event-content {
-    background-color: #fff;
-    border: 2px solid #007bff;
-    border-radius: 8px;
-    padding: 15px;
-    width: 100%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* Title style */
+  .event-content h3 {
+    color: #fff; /* White title for visibility in dark mode */
   }
-  
-  /* Event titles */
-  .timeline-event .event-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
+
+  /* Date style */
+  .event-content p {
+    color: #ddd; /* Lighter color for date */
   }
-  
-  .timeline-event .event-description {
-    font-size: 16px;
-    color: #777;
+
+  /* Collage image styling */
+  .collage-image {
+    border: 2px solid #444;
   }
-  
-  /* Responsive layout for smaller screens */
-  @media (max-width: 768px) {
-    .timeline-container {
-      width: 100%;
-      margin: 20px auto;
-    }
-  
-    .timeline-line {
-      left: 20px;
-    }
-  
-    .timeline-event {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .timeline-event-left,
-    .timeline-event-right {
-      padding: 0;
-      text-align: center;
-    }
-  }
-  
+}

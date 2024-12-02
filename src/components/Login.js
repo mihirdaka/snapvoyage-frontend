@@ -1,64 +1,54 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Updated for React Router v6
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';  // Updated for Firebase v9+
-//import './Login.css'; // Add your CSS if any
+import React, { useEffect, useState } from 'react';
 import '../styles/auth.css';
-import PinterestLoginButton from '../components/PinterestLoginButton.js';
-
+import PinterestLoginButton from '../components/PinterestLoginButton';
 
 const Login = () => {
-  const navigate = useNavigate(); // Initialize useNavigate for page navigation
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
 
-  const handleFirebaseLogin = async (e) => {
-    e.preventDefault();
+  // Load dark mode state from localStorage
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(savedMode);
+    document.body.classList.toggle('dark-mode', savedMode);
+  }, []);
 
-    const auth = getAuth(); // Initialize Firebase Auth
-
-    try {
-      // Attempt to log in the user
-      await signInWithEmailAndPassword(auth, email, password);
-      // If login is successful, redirect to dashboard (or other page)
-      navigate('/dashboard');
-    } catch (error) {
-      // Handle any errors during login (e.g., incorrect credentials)
-      setError(error.message);
-    }
+  // Toggle dark mode and save the state to localStorage
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    document.body.classList.toggle('dark-mode', newMode);
+    localStorage.setItem('darkMode', newMode); // Persist state
   };
 
   return (
-    <div className="login-container">
-      <h2>Login to SnapVoyage Via Pinterest</h2>
-      {error && <p className="error-message">{error}</p>}
-      <PinterestLoginButton />
-      {/* <form onSubmit={handleFirebaseLogin}>
-        <div className="input-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-       
+    <div className="login-page">
+      {/* Dark Mode Toggle Button Outside the Container */}
+      <div className="dark-mode-switch">
+        <span>{darkMode ? 'Dark Mode' : 'Light Mode'}</span>
+        <label className="switch">
+          <input type="checkbox" checked={darkMode} onChange={toggleDarkMode} />
+          <span className="slider"></span>
+        </label>
+      </div>
 
-        {/* <button type="submit" className="login-btn">Login</button> */}
-    
-       <p>Don't have an account? <a href="/register">Sign up</a></p>
+      {/* Login Container */}
+      <div className="login-container">
+        {/* App Name Inside the Container */}
+        <header className="app-header">
+          <h1>SnapVoyage</h1>
+        </header>
+
+        {/* Login Button */}
+        <PinterestLoginButton />
+      </div>
+
+      {/* Footer Outside the Container */}
+      <footer className="app-footer">
+        <p>&copy; 2024 SnapVoyage. All Rights Reserved.</p>
+        <p>
+          <a href="#">Pinterest</a> | <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+        </p>
+      </footer>
     </div>
   );
 };
