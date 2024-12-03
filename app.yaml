@@ -1,8 +1,7 @@
 runtime: nodejs20
-handlers:
-  - url: /static
-    static_dir: build/static
 
-  - url: /index.html
-    static_files: build/index.html
-    upload: build/index.html
+env: standard  # Standard environment
+
+instance_class: F1  # Choose an instance class based on your needs
+
+entrypoint: npm start  # This tells Google Cloud how to start your serve

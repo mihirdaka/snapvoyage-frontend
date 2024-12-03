@@ -3,6 +3,9 @@ import '../styles/dashboard.css';
 import Timeline from './Timeline';
 import html2canvas from 'html2canvas';
 
+import { useLocation, useNavigate } from 'react-router-dom';
+
+
 const Dashboard = () => {
     const [boards, setBoards] = useState([]);
     const [error, setError] = useState(null);
@@ -10,6 +13,10 @@ const Dashboard = () => {
     const [darkMode, setDarkMode] = useState(false);
     const [username, setUsername] = useState('');
 
+    const location = useLocation();
+    const navigate = useNavigate();
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token');
     // Load dark mode state from localStorage
     useEffect(() => {
         const savedMode = localStorage.getItem('darkMode') === 'true';
@@ -34,6 +41,10 @@ const Dashboard = () => {
             try {
                 const response = await fetch('http://localhost:4000/api/pinterest/fetchAllPins', {
                     credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',  // Ensure the request content type is set correctly
+                        'Authorization': `${token}`, // Add token from localStorage
+                    },
                 });
                 if (!response.ok) throw new Error('Failed to fetch boards');
                 const data = await response.json();
